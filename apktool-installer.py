@@ -13,13 +13,13 @@ def is_admin():
 
 ADB_PATH = get_cmd_output("where adb").strip()
 DEFAULT_IP='127.0.0.1:58526'
-PATH=os.getenv('USERPROFILE')
+PATH=os.getenv('SYSTEMROOT')+'\\'
 
 def main():
     if not 'not' in ADB_PATH:
         print("adb found at: " + ADB_PATH)
     else:
-        print("adb not found, please install it")  
+        print("adb not found, please install it and/or add it to your PATH")  
         exit()
     ipt,ip=input(f'default WSA IP is {DEFAULT_IP}, do you wish to change this? (y/n)').lower(),DEFAULT_IP
     if ipt == 'y':

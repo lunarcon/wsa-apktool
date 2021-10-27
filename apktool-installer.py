@@ -18,10 +18,10 @@ PATH=os.getenv('SYSTEMROOT')+'\\'
 def main():
     if '\\' in ADB_PATH:
         print("adb found at: " + ADB_PATH)
-    else:
-        print("adb not found, please install it and/or add it to your PATH")  
+    else:  
+        PATH=input('enter path to adb.exe ')
         exit()
-    ipt,ip=input(f'default WSA IP is {DEFAULT_IP}, do you wish to change this? (y/n)').lower(),DEFAULT_IP
+    ipt,ip=input(f'default WSA IP is {DEFAULT_IP}, do you wish to change this? (y/n) ').lower(),DEFAULT_IP
     if ipt == 'y':
         ip=input('enter new IP: ')
     print('making apktool...')

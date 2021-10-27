@@ -30,8 +30,8 @@ def main():
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
     # trying to set apktool.bat as the default app to open .apk files
-    out=get_cmd_output('reg delete "HKEY_CURRENT_USER\\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.apk" /f')
-    os.system(f'REG ADD HKCR\Software\Classes\.apk\shell\open\command /t REG_SZ /d "{PATH}apktool.bat" /f')
+    out=get_cmd_output('reg delete "HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.apk" /f')
+    os.system(f'REG ADD HKCR\\Software\\Classes\\.apk\\shell\\open\\command /t REG_SZ /d "{PATH}apktool.bat" /f')
     os.system('assoc .apk=apkfile')
     os.system('ftype apkfile="'+PATH+'apktool.bat" "%1"')
     # it's worth a shot!

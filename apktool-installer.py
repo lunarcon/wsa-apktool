@@ -28,6 +28,10 @@ def main():
     batch=f'{ADB_PATH} connect {ip}\n{ADB_PATH} install %1'
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
+    # trying to set apktool.bat as the default app to open .apk files
+    os.system('assoc .apk=apkfile')
+    os.system('ftype apkfile="'+PATH+'apktool.bal" "%1"')
+    # it's worth a shot!
     print('you can run this installer again in case your WSA IP changes. press any key to exit.')
     if msvcrt.getch():
         exit()

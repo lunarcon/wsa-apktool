@@ -14,6 +14,7 @@ def is_admin():
 ADB_PATH = get_cmd_output("where adb").strip()
 DEFAULT_IP='127.0.0.1:58526'
 PATH=os.getenv('SYSTEMROOT')+'\\'
+WSA='WsaClient.exe /launch wsa://com.android.documentsui'
 
 def main():
     global PATH
@@ -26,7 +27,7 @@ def main():
     if ipt == 'y':
         ip=input('enter new IP: ')
     print('making apktool...')
-    batch=f'@echo off\necho installing apk...\ntasklist /fi "ImageName eq WsaClient.exe" /fo csv 2>NUL | find /I "WsaClient.exe">NUL\nIF "%ERRORLEVEL%"=="0" (\n{ADB_PATH} connect {ip}\n{ADB_PATH} install %1\n) ELSE (echo ERROR: Windows Subsystem for Android must be running.\npause\nexit /b)'
+    batch=f':start\n@echo off\necho installing apk...\ntasklist /fi "ImageName eq WsaClient.exe" /fo csv 2>NUL | find /I "WsaClient.exe">NUL\nIF "%ERRORLEVEL%"=="0" (\n{ADB_PATH} connect {ip}\n{ADB_PATH} install %1\n) ELSE (echo WSA is not running!\necho starting WSA...\n{WSA}\ngoto start)'
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
     # trying to set apktool.bat as the default app to open .apk files

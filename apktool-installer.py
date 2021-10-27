@@ -16,6 +16,7 @@ DEFAULT_IP='127.0.0.1:58526'
 PATH=os.getenv('SYSTEMROOT')+'\\'
 
 def main():
+    global PATH
     if '\\' in ADB_PATH:
         print("adb found at: " + ADB_PATH)
     else:  

@@ -1,9 +1,10 @@
-import os,subprocess,sys,ctypes
+import os,subprocess,sys,ctypes,msvcrt
 
 def get_cmd_output(cmd):
     p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
     out, err = p.communicate()
     return out.decode("utf-8")
+
 def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
@@ -30,7 +31,10 @@ def main():
     print('registering .apk extension to run apktool')
     os.system(f'REG ADD HKCR\Software\Classes\.apk\shell\open\command /t REG_SZ /d "{PATH}apktool.bat" /f')
     print('done!')
-    
+    print('you can run this installer again in case your WSA IP changes. press any key to exit.')
+    if msvcrt.getch():
+        exit()
+
 if __name__ == '__main__':
     if is_admin():
         main()

@@ -9,8 +9,8 @@ def is_admin():
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
     except:
-        return False
-
+        return False  
+    
 ADB_PATH = get_cmd_output("where adb").strip()
 DEFAULT_IP='127.0.0.1:58526'
 PATH=os.getenv('SYSTEMROOT')+'\\'
@@ -29,8 +29,8 @@ def main():
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
     print('registering .apk extension to run apktool')
-    os.system(f'REG ADD HKCR\Software\Classes\.apk\shell\open\command /t REG_SZ /d "{PATH}apktool.bat" /f')
-    print('done!')
+    os.system("assoc .apk=\""+PATH+"apktool.bat\"")
+    print(f'done!\n(if that didn\'t work, please manually set .apk file association to {PATH}apktool.bat)')
     print('you can run this installer again in case your WSA IP changes. press any key to exit.')
     if msvcrt.getch():
         exit()

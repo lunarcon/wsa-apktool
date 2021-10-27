@@ -28,9 +28,6 @@ def main():
     batch=f'{ADB_PATH} connect {ip}\n{ADB_PATH} install %1'
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
-    print('registering .apk extension to run apktool')
-    os.system("assoc .apk=\""+PATH+"apktool.bat\"")
-    print(f'done!\nif that didn\'t work (it probably didn\'t), please manually set .apk file association to {PATH}apktool.bat')
     print('you can run this installer again in case your WSA IP changes. press any key to exit.')
     if msvcrt.getch():
         exit()

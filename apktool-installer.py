@@ -26,7 +26,7 @@ def main():
     if ipt == 'y':
         ip=input('enter new IP: ')
     print('making apktool...')
-    batch=f':start\ntasklist /fi "ImageName eq WsaClient.exe" /fo csv 2>NUL | find /I "WsaClient.exe">NUL\nif "%ERRORLEVEL%"=="0" (\n{ADB_PATH} connect {ip}\n{ADB_PATH} install %1\n)\nelse (x=msgbox("Windows Subsystem for Android must be running." ,0, "apktool") >> msgbox.vbs\nstart msgbox.vbs)'
+    batch=f'@echo off\necho installing apk...\ntasklist /fi "ImageName eq WsaClient.exe" /fo csv 2>NUL | find /I "WsaClient.exe">NUL\nIF "%ERRORLEVEL%"=="0" (\n{ADB_PATH} connect {ip}\n{ADB_PATH} install %1\n) ELSE (echo ERROR: Windows Subsystem for Android must be running.\npause\nexit /b)'
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
     # trying to set apktool.bat as the default app to open .apk files

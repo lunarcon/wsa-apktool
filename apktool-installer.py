@@ -16,7 +16,7 @@ DEFAULT_IP='127.0.0.1:58526'
 PATH=os.getenv('SYSTEMROOT')+'\\'
 
 def main():
-    if not 'not' in ADB_PATH:
+    if '\\' in ADB_PATH:
         print("adb found at: " + ADB_PATH)
     else:
         print("adb not found, please install it and/or add it to your PATH")  
@@ -31,7 +31,7 @@ def main():
     # trying to set apktool.bat as the default app to open .apk files
     os.system(f'REG ADD HKCR\Software\Classes\.apk\shell\open\command /t REG_SZ /d "{PATH}apktool.bat" /f')
     os.system('assoc .apk=apkfile')
-    os.system('ftype apkfile="'+PATH+'apktool.bal" "%1"')
+    os.system('ftype apkfile="'+PATH+'apktool.bat" "%1"')
     # it's worth a shot!
     print('you can run this installer again in case your WSA IP changes. press any key to exit.')
     if msvcrt.getch():

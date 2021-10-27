@@ -26,7 +26,7 @@ def main():
     if ipt == 'y':
         ip=input('enter new IP: ')
     print('making apktool...')
-    batch=f'{ADB_PATH} connect {ip}\n{ADB_PATH} install %1'
+    batch=f'tasklist /fi "ImageName eq WsaClient.exe" /fo csv 2>NUL | find /I "WsaClient.exe">NUL\nif "%ERRORLEVEL%"=="0" (\n{ADB_PATH} connect {ip}\n{ADB_PATH} install %1\n)'
     with open(f'{PATH}apktool.bat','w') as f:
         f.write(batch)
     # trying to set apktool.bat as the default app to open .apk files
